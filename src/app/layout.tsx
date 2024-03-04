@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { WithSidebar } from "@/components/ui/with-sidebar";
+import SidebarContent from "@/components/ui/sidebar-content";
+import CustomHeader from "@/components/ui/custom-header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <WithSidebar
+          sidebarContent={SidebarContent}
+          mobileDashboardHeader={CustomHeader}>
+          {children}
+        </WithSidebar>
+      </body>
     </html>
   );
 }
