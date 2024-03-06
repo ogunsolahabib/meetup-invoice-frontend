@@ -4,6 +4,7 @@ import "./globals.css";
 import { WithSidebar } from "@/components/ui/with-sidebar";
 import SidebarContent from "@/components/ui/sidebar-content";
 import CustomHeader from "@/components/ui/custom-header";
+import TopBar from "@/components/ui/top-bar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,10 @@ export default function RootLayout({
         <WithSidebar
           sidebarContent={SidebarContent}
           mobileDashboardHeader={CustomHeader}>
-          {children}
+          <main>
+            <TopBar />
+            {children}
+          </main>
         </WithSidebar>
       </body>
     </html>
