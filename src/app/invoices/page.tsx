@@ -1,3 +1,6 @@
+'use client';
+import InvoicesTable from "@/components/ui/invoices-table";
+
 export default function Incoices() {
-    return <>invoices</>
+    return <InvoicesTable />
 }
