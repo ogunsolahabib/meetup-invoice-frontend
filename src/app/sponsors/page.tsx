@@ -1,3 +1,5 @@
+import SponsorsTable from "@/components/ui/sponsors-table";
+
 export default function Sponsors() {
-    return <>sponsors</>
+    return <SponsorsTable />
 }
