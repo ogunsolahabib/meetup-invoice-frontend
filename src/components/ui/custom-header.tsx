@@ -1,15 +1,12 @@
 import { Button } from "./button";
 import LoginCheck from "./login-check";
 import { QuickMenuDropdown } from "./quick-menu-dropdown";
+import TopBar from "./top-bar";
 
 export default function CustomHeader() {
     return (
-        <div className="flex justify-between w-full">
-            <span className="text-xl font-extrabold">Tech Meetup</span>
-            <div className="flex gap-3">
-                <LoginCheck />
-                <QuickMenuDropdown />
-            </div>
+        <div className="flex h-16 items-center justify-between sticky top-0">
+            <TopBar />
         </div>
     );
 }

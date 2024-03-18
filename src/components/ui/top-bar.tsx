@@ -1,9 +1,17 @@
 import CustomHeader from "./custom-header";
+import LoginCheck from "./login-check";
+import { QuickMenuDropdown } from "./quick-menu-dropdown";
+import TopBarExtra from "./top-bar-extra";
 
 export default function TopBar() {
     return (
-        <div className="flex h-16 items-center justify-between sticky top-0">
-            <CustomHeader />
+
+        <div className="flex justify-between w-full">
+            <span className="text-xl font-extrabold">Tech Meetup</span>
+            <div className="hidden md:block">
+                <TopBarExtra />
+            </div>
         </div>
+
     )
 }

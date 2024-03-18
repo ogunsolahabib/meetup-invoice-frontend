@@ -4,7 +4,6 @@ import "./globals.css";
 import { WithSidebar } from "@/components/ui/with-sidebar";
 import SidebarContent from "@/components/ui/sidebar-content";
 import CustomHeader from "@/components/ui/custom-header";
-import TopBar from "@/components/ui/top-bar";
 import ReactQueryWrapper from "@/components/Wrappers/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,7 +26,9 @@ export default function RootLayout({
             sidebarContent={SidebarContent}
             mobileDashboardHeader={CustomHeader}>
             <main>
-              <TopBar />
+              <div className="hidden md:block">
+                <CustomHeader />
+              </div>
               {children}
             </main>
           </WithSidebar>
