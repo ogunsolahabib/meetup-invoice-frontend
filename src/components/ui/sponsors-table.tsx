@@ -19,19 +19,15 @@ export default function SponsorsTable() {
             <DataTable
                 columns={[
                     {
-                        accessorKey: "sponsor.name",
-                        header: "Sponsor",
+                        accessorKey: "name",
+                        header: "Name",
                     },
+
                     {
-                        accessorKey: "total_amount",
-                        header: "Amount",
-                    },
-                    {
-                        accessorKey: "invoice_date",
-                        header: "Date",
-                        cell: ({ getValue }) => {
-                            return convertToDateString(getValue());
-                        },
+                        accessorKey: "city",
+                        header: "Address",
+                        accessorFn: ({ street, city }) => street + ', ' + city
+
                     },
                 ]}
                 data={data ?? []}
