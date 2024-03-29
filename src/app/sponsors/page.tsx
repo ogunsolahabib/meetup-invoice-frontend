@@ -1,5 +1,19 @@
+import CreateSponsorModal from "@/components/page-specific/sponsors/create-sponsor-modal";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import SponsorsTable from "@/components/ui/sponsors-table";
 
 export default function Sponsors() {
-    return <SponsorsTable />
+    return <>
+        <div className="flex justify-between">
+            <h1>Sponsors</h1>
+
+            <Dialog >
+                <DialogTrigger>
+                    Create
+                </DialogTrigger>
+                <CreateSponsorModal />
+            </Dialog>
+        </div>
+        <SponsorsTable />
+    </>
 }
