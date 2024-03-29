@@ -6,9 +6,22 @@ import { useReactQueryFetch } from "@/lib/queryHooks";
 import { DataTable } from "./data-table";
 import convertToDateString from "@/lib/convertToDateString";
 
-export default function InvoicesTable() {
+/**
+ * A table to display all invoices.
+ *
+ * @returns The invoices table component.
+ */
 
-    const { data, isLoading } = useReactQueryFetch('invoices', '/invoices');
+interface Invoice {
+    sponsor: {
+        name: string;
+    };
+    total_amount: number;
+    invoice_date: string;
+}
+export function InvoicesTable(): JSX.Element {
+
+    const { data, isLoading } = useReactQueryFetch<Invoice[]>('invoices', '/invoices');
 
     if (isLoading) {
         return <p>Loading...</p>
@@ -39,3 +52,4 @@ export default function InvoicesTable() {
         </div>
     )
 }
+
