@@ -3,7 +3,7 @@
 import { API_URL } from "@/constants";
 import { useReactQueryFetch } from "@/lib/queryHooks";
 
-import { DataTable } from "./data-table";
+import { DataTable } from "../../ui/data-table";
 import convertToDateString from "@/lib/convertToDateString";
 
 /**
