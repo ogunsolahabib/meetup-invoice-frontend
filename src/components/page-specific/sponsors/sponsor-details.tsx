@@ -1,11 +1,11 @@
 'use client';
 import { Separator } from "@/components/ui/separator";
-import ContactsTable from "./contacts-table";
+import ContactsSection from "./contacts-section";
 import { useReactQueryFetch } from "@/lib/queryHooks";
 import { Sponsor } from "@/types/sponsors";
 
 export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
-    const { data, isLoading } = useReactQueryFetch<Sponsor>(sponsor_id, `sponsors/${sponsor_id}`,);
+    const { data, isLoading } = useReactQueryFetch<Sponsor>(sponsor_id, `sponsors/${sponsor_id}`);
 
     if (isLoading) {
         return <p>Loading...</p>
@@ -29,7 +29,7 @@ export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
                     </div>
                 </section>
 
-                <ContactsTable data={data?.contacts ?? []} />
+                <ContactsSection data={data?.contacts ?? []} />
             </div>
         </div>
     )

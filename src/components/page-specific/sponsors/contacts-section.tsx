@@ -1,13 +1,19 @@
+import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/data-table";
 import { Separator } from "@/components/ui/separator";
 import { Contact } from "@/types/sponsors";
+import AddContactModal from "./add-contact-modal";
 
-export default function ContactsTable({ data }: { data: Contact[] }) {
+export default function ContactsSection({ data }: { data: Contact[] }) {
 
     return (
         <section>
             <Separator className="my-2" />
-            <h2>Contacts</h2>
+            <div className="flex justify-between">
+
+                <h2>Contacts</h2>
+                <AddContactModal isFirstContact={data.length === 0} sponsor_id={data[0]?.sponsor_id} />
+            </div>
 
             <DataTable
                 columns={[

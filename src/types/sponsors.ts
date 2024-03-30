@@ -2,6 +2,8 @@ export interface Contact {
     name: string;
     email: number;
     phone: string;
+    is_primary: boolean;
+    sponsor_id: string;
 }
 
 export interface Sponsor {
