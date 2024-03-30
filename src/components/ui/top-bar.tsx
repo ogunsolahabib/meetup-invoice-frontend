@@ -7,7 +7,7 @@ export default function TopBar() {
     return (
 
         <div className="flex justify-between w-full">
-            <span className="text-xl font-extrabold">Tech Meetup</span>
+            <span className="text-xl md:text-2xl font-extrabold text-gray-500">Tech Meetup</span>
             <div className="hidden md:block">
                 <TopBarExtra />
             </div>
