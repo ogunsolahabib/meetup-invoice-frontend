@@ -19,7 +19,7 @@ interface Invoice {
     total_amount: number;
     invoice_date: string;
 }
-export function InvoicesTable(): JSX.Element {
+export default function InvoicesTable(): JSX.Element {
 
     const { data, isLoading } = useReactQueryFetch<Invoice[]>('invoices', '/invoices');
 
