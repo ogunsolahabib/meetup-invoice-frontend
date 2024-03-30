@@ -14,7 +14,7 @@ interface Sponsor {
 
 export default function SponsorsTable(): JSX.Element {
 
-    const { data, isLoading } = useReactQueryFetch<Sponsor[]>('sponsors', '/sponsors');
+    const { data, isLoading } = useReactQueryFetch<Sponsor[]>('sponsors', 'sponsors');
 
     if (isLoading) {
         return <p>Loading...</p>

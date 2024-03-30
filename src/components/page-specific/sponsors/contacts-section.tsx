@@ -7,7 +7,6 @@ export default function ContactsSection({ data }: { data: Contact[] }) {
 
     return (
         <section>
-            <Separator className="my-2" />
             <div className="flex justify-between">
 
                 <h2>Contacts</h2>
