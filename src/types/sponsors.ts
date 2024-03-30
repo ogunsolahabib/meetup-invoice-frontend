@@ -7,6 +7,7 @@ export interface Contact {
 }
 
 export interface Sponsor {
+    sponsor_id: string;
     name: string;
     street: string;
     city: string;

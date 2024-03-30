@@ -2,12 +2,16 @@ import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle, Dialog
 import CreateSponsorForm from "./create-sponsor-form";
 
 export default function CreateSponsorModal() {
-    return (
+    return (<Dialog>
+        <DialogTrigger>
+            Create
+        </DialogTrigger>
         <DialogContent>
             <DialogHeader>
                 <DialogTitle>Create A Sponsor</DialogTitle>
             </DialogHeader>
             <CreateSponsorForm />
         </DialogContent>
+    </Dialog>
     )
 }

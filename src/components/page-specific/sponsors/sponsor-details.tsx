@@ -5,12 +5,16 @@ import { useReactQueryFetch } from "@/lib/queryHooks";
 import { Sponsor } from "@/types/sponsors";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import AddContactForm from "./add-contact-form";
 
 export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
-    const { data, isLoading } = useReactQueryFetch<Sponsor>(sponsor_id, `sponsors/${sponsor_id}`);
-
+    const { data, isLoading, error } = useReactQueryFetch<Sponsor>(sponsor_id, `sponsors/${sponsor_id}`);
+    console.log(error, error && !data?.sponsor_id)
     if (isLoading) {
         return <p>Loading...</p>
+    }
+    if (error || !data?.sponsor_id) {
+        return <p>Error</p>
     }
     return (
         <div className="p-10 space-y-10">
@@ -21,7 +25,6 @@ export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
             <div className="space-y-10">
 
                 <section>
-                    <h2>Basic Info</h2>
                     <div className="space-y-4">
                         <strong>{data?.name}</strong>
 
@@ -33,7 +36,9 @@ export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
                 </section>
                 <Separator className="my-1" />
 
-                <ContactsSection data={data?.contacts ?? []} />
+                {data?.contacts?.length ? <ContactsSection data={data?.contacts ?? []} /> : <AddContactForm sponsor_id={sponsor_id} isFirstContact={true} />}
+
+
             </div>
         </div>
     )

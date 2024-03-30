@@ -24,7 +24,7 @@ const formSchema = z.object({
 })
 
 
-export default function AddContactForm({ sponsor_id, isFirstContact }: { sponsor_id: string, isFirstContact: boolean }) {
+export default function AddContactForm({ sponsor_id, isFirstContact }: { sponsor_id: string, isFirstContact?: boolean }) {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -35,7 +35,6 @@ export default function AddContactForm({ sponsor_id, isFirstContact }: { sponsor
         },
     })
 
-    // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
     }

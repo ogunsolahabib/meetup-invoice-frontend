@@ -10,6 +10,6 @@ import { UseQueryResult, useQuery } from "react-query"
  */
 export const useReactQueryFetch = <T>(key: string | string[], pathname: string): UseQueryResult<T> => {
     const URL = `${API_URL}/${pathname}`;
-    return useQuery<T, Error>(key, () => fetch(URL).then(res => res.json()));
+    return useQuery<T, Error>(key, () => fetch(URL).then(res => res.json()).catch(err => console.log(err)));
 }
 
