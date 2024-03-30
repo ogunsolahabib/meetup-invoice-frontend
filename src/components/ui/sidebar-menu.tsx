@@ -9,7 +9,7 @@ export default function SidebarMenu() {
     const pathname = usePathname();
 
     const getClassName = (href: string) => clsx('block rounded px-4 py-2.5 transition duration-20  hover:text-white hover:bg-gray-900', {
-        'bg-gray-900 text-white': pathname === href
+        'bg-gray-900 text-white': pathname.includes(href)
     });
 
 
