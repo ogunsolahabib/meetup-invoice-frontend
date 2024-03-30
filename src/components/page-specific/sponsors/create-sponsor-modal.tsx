@@ -1,4 +1,5 @@
 import { Dialog, DialogContent, DialogHeader, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import CreateSponsorForm from "./create-sponsor-form";
 
 export default function CreateSponsorModal() {
     return (
@@ -6,6 +7,7 @@ export default function CreateSponsorModal() {
             <DialogHeader>
                 <DialogTitle>Create A Sponsor</DialogTitle>
             </DialogHeader>
+            <CreateSponsorForm />
         </DialogContent>
     )
 }
