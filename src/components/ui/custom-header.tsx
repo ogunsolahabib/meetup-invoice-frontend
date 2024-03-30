@@ -5,8 +5,9 @@ import TopBar from "./top-bar";
 
 export default function CustomHeader() {
     return (
-        <div className="flex h-16 items-center justify-between sticky top-0">
-            <TopBar />
-        </div>
+
+        <header className="sticky inset-0 top-0 md:border-b">
+            <div className="container flex h-16 items-center justify-between "><TopBar /></div>
+        </header>
     );
 }

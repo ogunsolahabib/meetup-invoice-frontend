@@ -14,8 +14,8 @@ export const WithMobileSidebar = ({
     return (
         <>
             <Sheet>
-                <div className="mt-5 flex md:hidden">
-                    <div className="flex flex-1">
+                <div className="container flex md:hidden">
+                    <div className="md:flex flex-1">
                         {MobileDashboardHeader && <MobileDashboardHeader />}
                     </div>
                     <SheetTrigger>
@@ -31,7 +31,6 @@ export const WithMobileSidebar = ({
     )
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 
 const WithDesktopSidebar = ({
     children,
@@ -42,8 +41,8 @@ const WithDesktopSidebar = ({
 }) => {
     return (
         // style used from here -> https://github.com/shadcn-ui/ui/blob/1cf5fad881b1da8f96923b7ad81d22d0aa3574b9/apps/www/app/docs/layout.tsx#L12
-        <div className="container h-screen flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] md:gap-6 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-            <aside className="fixed top-14 z-30 -ml-2 hidden h-screen w-full shrink-0 border-r md:sticky md:block">
+        <div className="h-screen flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)] ">
+            <aside className="fixed top-14 z-30 hidden h-screen w-full shrink-0 border-r md:sticky md:block">
                 <div className="h-full py-6 pl-8 pr-6 lg:py-8">
                     <SidebarContent />
                 </div>
@@ -53,7 +52,6 @@ const WithDesktopSidebar = ({
     )
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
 
 export const WithSidebar = ({
     children,
