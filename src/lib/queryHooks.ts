@@ -13,3 +13,15 @@ export const useReactQueryFetch = <T>(key: string | string[], pathname: string):
     return useQuery<T, Error>(key, () => fetch(URL).then(res => res.json()).catch(err => console.log(err)));
 }
 
+
+export const useReactQueryPostFetch = <T>(key: string | string[], pathname: string, body: any): UseQueryResult<T> => {
+    const URL = `${API_URL}/${pathname}`;
+    return useQuery<T, Error>(key, () => fetch(URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }).then(res => res.json()).catch(err => console.log(err)));
+}
+
