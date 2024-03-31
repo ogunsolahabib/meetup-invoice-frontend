@@ -2,6 +2,8 @@
 import { API_URL } from "@/constants";
 import { UseQueryResult, useQuery } from "react-query";
 import { getSession } from "next-auth/react";
+import { signOut } from "@/auth";
+import { redirect, useRouter } from "next/navigation";
 
 
 /**
@@ -12,6 +14,8 @@ import { getSession } from "next-auth/react";
  */
 export const useReactQueryFetch = <T>(key: string | string[], pathname: string): UseQueryResult<T> => {
 
+    const router = useRouter()
+
     const URL = `${API_URL}/${pathname}`;
     return useQuery<T, Error>(key, async () => {
         const session = await getSession();
@@ -21,7 +25,17 @@ export const useReactQueryFetch = <T>(key: string | string[], pathname: string):
             headers: {
                 'Authorization': `Bearer ${id_token}`
             }
-        }).then(res => res.json()).catch(err => console.log(err))
+        }).then(async res => {
+            const resJson = await res.json();
+            if (resJson.message === 'Unauthorized') {
+                router.push('/api/auth/signin');
+            }
+            return resJson;
+        }
+        ).catch(err => {
+            console.log(err);
+
+        })
     });
 }
 
