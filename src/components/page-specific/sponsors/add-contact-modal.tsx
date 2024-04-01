@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import AddContactForm from "./add-contact-form";
 import { useState } from "react";
 
-export default function AddContactModal({ isFirstContact, sponsor_id }: { isFirstContact: boolean, sponsor_id: string }) {
+export default function AddContactModal({ isFirstContact, sponsor_id, refetch }: { isFirstContact: boolean, sponsor_id: string, refetch: () => void }) {
 
     const [open, setOpen] = useState(false);
 
@@ -13,7 +13,7 @@ export default function AddContactModal({ isFirstContact, sponsor_id }: { isFirs
             <DialogHeader>
                 <DialogTitle>Create A Contact</DialogTitle>
             </DialogHeader>
-            <AddContactForm sponsor_id={sponsor_id} isFirstContact={isFirstContact} />
+            <AddContactForm sponsor_id={sponsor_id} isFirstContact={isFirstContact} onFinish={() => { setOpen(false); refetch() }} />
         </DialogContent>
     </Dialog>
 

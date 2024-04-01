@@ -8,7 +8,7 @@ import { ArrowLeft } from "lucide-react";
 import AddContactForm from "./add-contact-form";
 
 export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
-    const { data, isLoading, error } = useReactQueryFetch<Sponsor>(sponsor_id, `sponsors/${sponsor_id}`);
+    const { data, isLoading, error, refetch } = useReactQueryFetch<Sponsor>(sponsor_id, `sponsors/${sponsor_id}`);
     console.log(data?.contacts?.length)
     if (isLoading) {
         return <p>Loading...</p>
@@ -36,9 +36,9 @@ export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
                 </section>
                 <Separator className="my-1" />
 
-                {data?.contacts?.length ? <ContactsSection data={data?.contacts ?? []} sponsor_id={sponsor_id} /> : <div className="w-full md:w-80">
+                {data?.contacts?.length ? <ContactsSection data={data?.contacts ?? []} sponsor_id={sponsor_id} refetch={refetch} /> : <div className="w-full md:w-80">
                     <h2>Add first contact</h2>
-                    <AddContactForm sponsor_id={sponsor_id} isFirstContact={true} /></div>}
+                    <AddContactForm sponsor_id={sponsor_id} isFirstContact={data.contacts?.length === 0} onFinish={() => refetch()} /></div>}
 
 
             </div>

@@ -25,7 +25,7 @@ const formSchema = z.object({
 })
 
 
-export default function AddContactForm({ sponsor_id, isFirstContact }: { sponsor_id: string, isFirstContact?: boolean }) {
+export default function AddContactForm({ sponsor_id, isFirstContact, onFinish }: { sponsor_id: string, isFirstContact?: boolean, onFinish?: () => void }) {
     const { mutate } = useReactQueryMutation(`/sponsors/${sponsor_id}/contacts`);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -48,7 +48,9 @@ export default function AddContactForm({ sponsor_id, isFirstContact }: { sponsor
 
         mutate(payload, {
             onSuccess: (data: any) => {
-                console.log(data)
+                if (onFinish) {
+                    onFinish();
+                }
             },
         })
 
