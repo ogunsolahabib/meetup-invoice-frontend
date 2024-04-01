@@ -9,7 +9,7 @@ import AddContactForm from "./add-contact-form";
 
 export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
     const { data, isLoading, error } = useReactQueryFetch<Sponsor>(sponsor_id, `sponsors/${sponsor_id}`);
-    console.log(error, error && !data?.sponsor_id)
+    console.log(data?.contacts?.length)
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -36,7 +36,9 @@ export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
                 </section>
                 <Separator className="my-1" />
 
-                {data?.contacts?.length ? <ContactsSection data={data?.contacts ?? []} /> : <AddContactForm sponsor_id={sponsor_id} isFirstContact={true} />}
+                {data?.contacts?.length ? <ContactsSection data={data?.contacts ?? []} sponsor_id={sponsor_id} /> : <div className="w-full md:w-80">
+                    <h2>Add first contact</h2>
+                    <AddContactForm sponsor_id={sponsor_id} isFirstContact={true} /></div>}
 
 
             </div>
