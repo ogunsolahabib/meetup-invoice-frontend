@@ -1,6 +1,6 @@
 'use client';
 import { API_URL } from "@/constants";
-import { UseQueryResult, useQuery } from "react-query";
+import { UseQueryResult, useMutation, useQuery } from "react-query";
 import { getSession } from "next-auth/react";
 import { signOut } from "@/auth";
 import { redirect, useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ export const useReactQueryFetch = <T>(key: string | string[], pathname: string):
         }).then(async res => {
             const resJson = await res.json();
             if (resJson.message === 'Unauthorized') {
-                router.push('/api/auth/signin');
+                return router.push('/api/auth/signin');
             }
             return resJson;
         }
@@ -40,14 +40,33 @@ export const useReactQueryFetch = <T>(key: string | string[], pathname: string):
 }
 
 
-export const useReactQueryPostFetch = <T>(key: string | string[], pathname: string, body: BodyInit): UseQueryResult<T> => {
+export const useReactQueryMutation = <T>(pathname: string, body: BodyInit) => {
+    const router = useRouter()
+
     const URL = `${API_URL}/${pathname}`;
-    return useQuery<T, Error>(key, () => fetch(URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    }).then(res => res.json()).catch(err => console.log(err)));
+
+    return useMutation<T, Error, any>({
+        mutationFn: async () => {
+            const session = await getSession();
+            const { id_token } = session?.user ?? {};
+            return fetch(URL, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${id_token}`
+                },
+                body
+            }).then(async res => {
+                const resJson = await res.json();
+                if (resJson.message === 'Unauthorized') {
+                    return router.push('/api/auth/signin');
+                }
+                return resJson;
+            }
+            ).catch(err => {
+                console.log(err);
+
+            })
+        }
+    })
 }
 
