@@ -15,11 +15,12 @@ const httpInstace = axios.create({
 });
 
 
-httpInstace.interceptors.response.use(response => {
-    if (response.status === 401) {
+httpInstace.interceptors.response.use(response => response, error => {
+
+    if (error.response.status === 401) {
         window.location.replace('/api/auth/signin');
     }
-    return response
+    return error
 });
 
 httpInstace.interceptors.request.use(async config => {
