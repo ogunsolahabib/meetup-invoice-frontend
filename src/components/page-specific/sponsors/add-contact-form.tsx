@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useReactQueryMutation } from "@/lib/queryHooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,6 +26,7 @@ const formSchema = z.object({
 
 
 export default function AddContactForm({ sponsor_id, isFirstContact }: { sponsor_id: string, isFirstContact?: boolean }) {
+    const { mutate } = useReactQueryMutation(`/sponsors/${sponsor_id}/contacts`);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -33,10 +35,24 @@ export default function AddContactForm({ sponsor_id, isFirstContact }: { sponsor
             phone: "",
             is_primary: isFirstContact
         },
-    })
+    });
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+
+        const payload = {
+            contact_name: values.contact_name,
+            email: values.email,
+            phone: values.phone,
+            is_primary: values.is_primary
+        };
+
+        mutate(payload, {
+            onSuccess: (data: any) => {
+                console.log(data)
+            },
+        })
+
+
     }
 
     return (

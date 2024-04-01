@@ -3,14 +3,14 @@ import { Separator } from "@/components/ui/separator";
 import { Contact } from "@/types/sponsors";
 import AddContactModal from "./add-contact-modal";
 
-export default function ContactsSection({ data }: { data: Contact[] }) {
+export default function ContactsSection({ data, sponsor_id }: { data: Contact[], sponsor_id: string }) {
 
     return (
         <section>
             <div className="flex justify-between">
 
                 <h2>Contacts</h2>
-                <AddContactModal isFirstContact={data.length === 0} sponsor_id={data[0]?.sponsor_id} />
+                <AddContactModal isFirstContact={data.length === 0} sponsor_id={sponsor_id} />
             </div>
 
             <DataTable
