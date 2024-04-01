@@ -41,13 +41,15 @@ const WithDesktopSidebar = ({
 }) => {
     return (
         // style used from here -> https://github.com/shadcn-ui/ui/blob/1cf5fad881b1da8f96923b7ad81d22d0aa3574b9/apps/www/app/docs/layout.tsx#L12
-        <div className="h-screen flex-1 items-start md:grid md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)] ">
-            <aside className="fixed top-14 z-30 hidden h-screen w-full shrink-0 border-r md:sticky md:block">
+        <div className="min-h-screen ">
+            <aside className="fixed overflow-auto top-0 bottom-0 z-30 h-screen hidden min-h-full w-full shrink-0 border-r md:block items-start md:w-[220px] lg:w-[240px]">
                 <div className="h-full py-6 pl-8 pr-6 lg:py-8">
                     <SidebarContent />
                 </div>
             </aside>
-            {children}
+            <div className="pl-0 md:pl-[220px] lg:pl-[240px]">
+                {children}
+            </div>
         </div>
     )
 }
