@@ -40,7 +40,7 @@ export default function AddContactForm({ sponsor_id, isFirstContact, onFinish }:
     function onSubmit(values: z.infer<typeof formSchema>) {
 
         const payload = {
-            contact_name: values.contact_name,
+            name: values.contact_name,
             email: values.email,
             phone: values.phone,
             is_primary: values.is_primary
