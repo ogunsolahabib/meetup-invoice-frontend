@@ -38,7 +38,7 @@ export default function InvoicesTable(): JSX.Element {
                     header: "Amount",
                 },
                 {
-                    accessorKey: "invoice_date",
+                    accessorKey: "created_at",
                     header: "Date",
                     cell: ({ getValue }) => {
                         return convertToDateString(getValue());
