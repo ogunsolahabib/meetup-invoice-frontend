@@ -10,6 +10,7 @@ interface Sponsor {
     name: string;
     street: string;
     city: string;
+    sponsor_id: string;
 }
 
 export default function SponsorsTable(): JSX.Element {
@@ -20,24 +21,29 @@ export default function SponsorsTable(): JSX.Element {
         return <p>Loading...</p>
     }
     return (
-        <div>
-            <DataTable
-                columns={[
-                    {
-                        accessorKey: "name",
-                        header: "Name",
-                    },
+        <DataTable
+            columns={[
+                {
+                    accessorKey: "name",
+                    header: "Name",
+                },
 
-                    {
-                        accessorKey: "city",
-                        header: "Address",
-                        accessorFn: ({ street, city }: Sponsor) => street + ', ' + city
+                {
+                    accessorKey: "city",
+                    header: "Address",
+                    accessorFn: ({ street, city }: Sponsor) => street + ', ' + city
 
-                    },
-                ]}
-                data={data ?? []}
-            />
-        </div>
+                },
+                {
+                    accessorKey: "sponsor_id",
+                    header: "Actions",
+                    cell: ({ getValue }) => <a href={`/sponsors/${getValue()}`}>View Details</a>
+
+                },
+            ]}
+            data={data ?? []}
+        />
+
     )
 }
 
