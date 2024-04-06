@@ -5,6 +5,7 @@ import { useReactQueryFetch } from "@/lib/queryHooks";
 
 import { DataTable } from "../../ui/data-table";
 import convertToDateString from "@/lib/convertToDateString";
+import { Invoice } from "@/types/invoices";
 
 /**
  * A table to display all invoices.
@@ -12,13 +13,7 @@ import convertToDateString from "@/lib/convertToDateString";
  * @returns The invoices table component.
  */
 
-interface Invoice {
-    sponsor: {
-        name: string;
-    };
-    total_amount: number;
-    invoice_date: string;
-}
+
 export default function InvoicesTable(): JSX.Element {
 
     const { data, isLoading } = useReactQueryFetch<Invoice[]>('invoices', '/invoices');
