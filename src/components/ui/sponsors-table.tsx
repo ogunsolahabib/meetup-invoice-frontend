@@ -35,7 +35,7 @@ export default function SponsorsTable(): JSX.Element {
 
                 },
                 {
-                    accessorKey: "sponsor_id",
+                    accessorKey: "id",
                     header: "Actions",
                     cell: ({ getValue }) => <a href={`/sponsors/${getValue()}`}>View Details</a>
 
