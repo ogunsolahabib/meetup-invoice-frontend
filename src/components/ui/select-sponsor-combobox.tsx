@@ -85,7 +85,7 @@ export default function SelectSponsorCombobox({ field, setValue, data }: { field
                                     <span>
                                         {name}
                                     </span>
-                                    <div className="flex gap-x-2">{contacts?.map(({ name }) => <span key={name}>{name}</span>)}</div>
+                                    <div className="flex gap-x-2">{contacts?.map(({ name }) => <span className="text-muted-foreground" key={name}>{name}</span>)}</div>
                                 </div>
 
                             </CommandItem>
