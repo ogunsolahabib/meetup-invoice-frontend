@@ -1,8 +1,7 @@
 "use client"
 
+import React, { useState } from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
-
-
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -27,21 +26,19 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 import { CommandList } from "cmdk"
-import { useReactQueryFetch } from "@/lib/queryHooks"
 import { Sponsor } from "@/types/sponsors"
 
 
 
-export function SelectSponsorCombobox({ field, setValue }: any) {
+export default function SelectSponsorCombobox({ field, setValue, data }: { field: any, setValue: any, data: Sponsor[] | undefined }) {
 
-    const { data, isLoading, error } = useReactQueryFetch<Sponsor[]>('sponsors', '/sponsors?includeContacts=true');
+    const [open, setOpen] = useState(false)
 
-    if (isLoading) return <p>Loading...</p>
-    if (error) return <p>Error</p>
+
     return (
 
 
-        <Popover>
+        <Popover open={open} onOpenChange={setOpen} >
             <PopoverTrigger asChild>
                 <FormControl>
                     <Button
@@ -63,7 +60,7 @@ export function SelectSponsorCombobox({ field, setValue }: any) {
             </PopoverTrigger>
             <PopoverContent className="w-full p-0">
                 <Command className="w-full md:w-[460px]">
-                    <CommandList>
+                    <CommandList autoFocus>
                         <CommandInput placeholder="Search sponsor..." />
                         <CommandEmpty>No sponsor added.</CommandEmpty>
                         {data?.map(({ id, name, contacts }) => (
@@ -72,7 +69,9 @@ export function SelectSponsorCombobox({ field, setValue }: any) {
                                 value={id}
                                 key={id}
                                 onSelect={() => {
-                                    setValue("sponsor_id", id)
+                                    setValue("sponsor_id", id);
+                                    setValue('sponsor_name', name);
+                                    setOpen(false);
                                 }}>
                                 <Check
                                     className={cn(
@@ -119,3 +118,6 @@ export function SelectSponsorCombobox({ field, setValue }: any) {
 
 
 }
+
+
+
