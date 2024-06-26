@@ -23,11 +23,11 @@ import { Sponsor } from "@/types/sponsors"
 
 
 
-export default function SelectSponsorCombobox({ field, setValue, data }: { field: any, setValue: any, data: Sponsor[] | undefined }) {
+export default function SelectSponsorCombobox({ field, setValue, data = [] }: { field: any, setValue: any, data: Sponsor[] | undefined }) {
 
     const [open, setOpen] = useState(false)
 
-
+    console.log({ data })
     return (
 
 
@@ -44,7 +44,7 @@ export default function SelectSponsorCombobox({ field, setValue, data }: { field
                     >
                         {field.value
                             ? data?.find(
-                                (item) => item.id === field.value
+                                (item) => item.id == field.value
                             )?.name
                             : "Select Sponsor"}
                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -59,10 +59,10 @@ export default function SelectSponsorCombobox({ field, setValue, data }: { field
                         {data?.map(({ id, name, contacts }) => (
 
                             <CommandItem
-                                value={id}
-                                key={id}
+                                value={`${id}`}
+                                key={`${id}`}
                                 onSelect={() => {
-                                    setValue("sponsor_id", id);
+                                    setValue("sponsor_id", `${id}`);
                                     setValue('sponsor_name', name);
                                     setOpen(false);
                                 }}>

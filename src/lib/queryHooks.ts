@@ -9,10 +9,9 @@ export const useReactQueryFetch = <T>(key: string | string[], pathname: string):
     );
 }
 
-export const useReactQueryMutation = <T>(pathname: string) => {
+export const useReactQueryMutation = <T>(pathname: string, type: 'post' | 'put' = 'post') => {
     return useMutation<T, Error, any>({
-        mutationFn: (body: BodyInit) => httpInstace.post(pathname, body).then(res => res.data
+        mutationFn: (body: BodyInit) => httpInstace[type](pathname, body).then(res => res.data
         ).catch(err => err?.response)
     })
 }
-

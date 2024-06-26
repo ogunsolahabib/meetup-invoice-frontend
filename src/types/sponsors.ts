@@ -13,3 +13,7 @@ export interface Sponsor {
     city: string;
     contacts: Contact[]
 }
+
+// todos:
+// sync auth envs with drive
+// check google nextauth for token expiration

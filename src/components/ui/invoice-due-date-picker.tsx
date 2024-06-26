@@ -1,7 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { addMonths, endOfMonth, format } from "date-fns"
+import { addMonths, endOfMonth, endOfDay, format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -33,7 +33,7 @@ export function InvoiceDueDatePicker({ field, setValue, }: { field: any, setValu
                         )}
                     >
                         {field.value ? (
-                            format(field.value, "YYYY-MM-dd")
+                            format(field.value, "yyyy-MM-dd")
                         ) : (
                             <span>Pick a date</span>
                         )}
@@ -45,9 +45,10 @@ export function InvoiceDueDatePicker({ field, setValue, }: { field: any, setValu
                 <Calendar
                     mode="single"
                     selected={field.value}
-                    onSelect={val => setValue("due_date", val ? format(val, "YYYY-MM-dd") : "")}
+                    onSelect={val => setValue(field.name, val ? format(val, "yyyy-MM-dd") : "")}
                     disabled={(date) =>
-                        date < new Date()
+                        // disable dates before today, enanble today
+                        endOfDay(date) < endOfDay(new Date())
                     }
                     initialFocus
                 />
