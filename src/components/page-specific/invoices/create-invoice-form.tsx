@@ -12,6 +12,7 @@ import { Sponsor } from "@/types/sponsors";
 import { INVOICE_AMOUNT } from "@/constants";
 import { InvoiceDueDatePicker } from "@/components/ui/invoice-due-date-picker";
 import useLocalStorage from "@/lib/useLocalStorage";
+import { useSession } from "next-auth/react";
 
 
 const formSchema = z.object({
@@ -55,6 +56,8 @@ type stages = 'add-to-db' | 'create-sheet' | 'rename-sheet' | 'fill-sheet' | 'cr
 export default function CreateInvoiceForm() {
 
     const { data, isLoading: isLoadingSponsors, error } = useReactQueryFetch<{ data: Sponsor[] }>('sponsors', '/sponsors?includeContacts=true');
+
+    const { data: sessionData } = useSession();
 
     const [stage, setStage] = useState<stages>('add-to-db');
 

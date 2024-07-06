@@ -5,6 +5,7 @@ import { WithSidebar } from "@/components/ui/with-sidebar";
 import SidebarContent from "@/components/ui/sidebar-content";
 import CustomHeader from "@/components/ui/custom-header";
 import ReactQueryWrapper from "@/components/Wrappers/react-query";
+import AuthSessionProvider from "@/components/Wrappers/AuthSessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,18 +22,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryWrapper>
-          <WithSidebar
-            sidebarContent={SidebarContent}
-            mobileDashboardHeader={CustomHeader}>
-            <main>
-              <div className="hidden md:block">
-                <CustomHeader />
-              </div>
-              {children}
-            </main>
-          </WithSidebar>
-        </ReactQueryWrapper>
+        <AuthSessionProvider>
+          <ReactQueryWrapper>
+            <WithSidebar
+              sidebarContent={SidebarContent}
+              mobileDashboardHeader={CustomHeader}>
+              <main>
+                <div className="hidden md:block">
+                  <CustomHeader />
+                </div>
+                {children}
+              </main>
+            </WithSidebar>
+          </ReactQueryWrapper>
+        </AuthSessionProvider>
       </body>
     </html>
   );
