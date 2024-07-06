@@ -15,7 +15,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
     secret: process.env.AUTH_SECRET,
     callbacks: {
         async jwt({ token, account, profile }) {
-            console.log({ token, account, profile });
+
             // if (account) {
             //     token.id_token = account.id_token;
             // }
@@ -87,7 +87,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
             }
         },
         async session({ session, token, }) {
-            console.log({ session, token });
+
             if (token && session.user) {
                 session.user = token.user as any;
                 // session.user.id_token = token.access_token;
@@ -96,13 +96,6 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
 
             return session
         },
-        // async session({ token, session }) {
-        //     console.log({ token, session })
-        //     if (session) {
-        //         session.user.id_token = token.id_token;
-        //     }
-        //     return session
-        // },
         async redirect({ url, baseUrl }) {
             // Allows relative callback URLs
             if (url.startsWith("/")) return `${baseUrl}${url}`

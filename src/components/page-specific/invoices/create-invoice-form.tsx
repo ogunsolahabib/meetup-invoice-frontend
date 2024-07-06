@@ -139,7 +139,7 @@ export default function CreateInvoiceForm() {
 
     const primaryContact = selectedSponsor?.contacts.find((contact) => contact.is_primary);
 
-    console.log({ selectedSponsor, primaryContact });
+
     async function onSubmit(values: z.infer<typeof formSchema>) {
 
         const payload = {

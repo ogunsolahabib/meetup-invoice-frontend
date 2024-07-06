@@ -14,7 +14,6 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Separator } from "@radix-ui/react-dropdown-menu"
 import { useReactQueryMutation } from "@/lib/queryHooks"
 import { useRouter } from "next/navigation"
 
@@ -45,7 +44,6 @@ export default function CreateSponsorForm() {
 
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
 
         const payload = {
             name: values.sponsor_name,
