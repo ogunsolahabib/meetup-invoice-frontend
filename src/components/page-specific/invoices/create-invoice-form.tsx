@@ -59,13 +59,13 @@ export default function CreateInvoiceForm() {
 
     const { data: sessionData } = useSession();
 
+    const { user: { email } = { email: '' } } = sessionData || {};
+
     const [stage, setStage] = useState<stages>('add-to-db');
 
     const [fileId, setFileId] = useState<string>('');
 
     const [folderId, setFolderId] = useState<string>('');
-
-    const [invoiceId, setInvoiceId] = useState<string>('');
 
     const { mutate: addToDb, isLoading: isAddingToDb } = useReactQueryMutation(`/invoices`);
 
@@ -148,7 +148,9 @@ export default function CreateInvoiceForm() {
             subject: values.subject,
             due_date: values.due_date,
             total_amount: values.amount,
-            start_date: values.start_date
+            start_date: values.start_date,
+            created_by: email,
+
         };
 
         const contactName = primaryContact?.name;
@@ -159,7 +161,6 @@ export default function CreateInvoiceForm() {
                 addToDb(payload, {
                     onSuccess: (data: any) => {
                         setStage('create-sheet');
-                        setInvoiceId(data.data.invoice_id);
                     },
                 });
             } catch (error) {
@@ -204,7 +205,8 @@ export default function CreateInvoiceForm() {
 
             try {
                 await fillSheet({
-                    fileId, sponsor_name: values.sponsor_name,
+                    fileId,
+                    sponsor_name: values.sponsor_name,
                     contactName,
                     addressLine1: selectedSponsor?.street,
                     addressLine2: selectedSponsor?.city,
@@ -250,7 +252,8 @@ export default function CreateInvoiceForm() {
             }
 
         } catch (error) {
-            console.log(error)
+            console.log(error);
+
         }
 
 
