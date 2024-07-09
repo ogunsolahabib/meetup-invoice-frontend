@@ -27,7 +27,6 @@ export default function SelectSponsorCombobox({ field, setValue, data = [] }: { 
 
     const [open, setOpen] = useState(false)
 
-    console.log({ data })
     return (
 
 
