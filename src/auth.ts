@@ -29,7 +29,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                     name: profile?.name,
                     email: profile?.email,
                     image: token?.picture,
-                    ...token.user,
+                    ...token.user as any,
                 }
 
                 return {
@@ -40,7 +40,7 @@ export const { handlers: { GET, POST }, auth, signIn, signOut } = NextAuth({
                     id_token: account.id_token
                 }
             }
-            else if (Date.now() < token.expires_at * 1000) {
+            else if (Date.now() < Number(token.expires_at) * 1000) {
                 // Subsequent logins, if the `access_token` is still valid, return the JWT
                 if (account) {
                     token.access_token = account.access_token;
