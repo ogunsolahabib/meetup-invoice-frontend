@@ -13,7 +13,7 @@ export default function SponsorDetails({ sponsor_id }: { sponsor_id: string }) {
     if (isLoading) {
         return <p>Loading...</p>
     }
-    if (error || !data?.sponsor_id) {
+    if (error || !data?.id) {
         return <p>Error</p>
     }
     return (
