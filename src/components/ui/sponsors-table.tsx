@@ -15,7 +15,8 @@ interface Sponsor {
 
 export default function SponsorsTable(): JSX.Element {
 
-    const { data, isLoading } = useReactQueryFetch<Sponsor[]>('sponsors', 'sponsors');
+    const { data, isLoading } = useReactQueryFetch<{ data: Sponsor[] }>('sponsors', 'sponsors');
+
 
     if (isLoading) {
         return <p>Loading...</p>
@@ -41,7 +42,7 @@ export default function SponsorsTable(): JSX.Element {
 
                 },
             ]}
-            data={data ?? []}
+            data={data?.data ?? []}
         />
 
     )
